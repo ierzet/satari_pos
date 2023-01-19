@@ -7,10 +7,11 @@ class TextInputFormWidget extends StatelessWidget {
       required this.keyField,
       required this.textInputType,
       required this.hintText,
-      required TextEditingController controller});
+      required this.controller});
   final String keyField;
   final TextInputType textInputType;
   final String hintText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class TextInputFormWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
+        controller: controller,
         key: Key(keyField),
         //TODO: ada null check disini
         keyboardType: textInputType,

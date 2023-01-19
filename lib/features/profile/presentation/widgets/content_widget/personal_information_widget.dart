@@ -17,26 +17,27 @@ class PersonalInformation extends StatefulWidget {
 
 class _PersonalInformationState extends State<PersonalInformation> {
   String _gender = '';
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController dateOfBirthController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController postalCodeController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _dateOfBirthController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _postalCodeController = TextEditingController();
 
   void postPersonalInformation(context) {
     BlocProvider.of<PersonalInformationBloc>(context).add(
       CreatePersonalInformation(
-        firstNameController.text,
-        lastNameController.text,
-        emailController.text,
-        dateOfBirthController.text,
-        addressController.text,
-        phoneNumberController.text,
-        postalCodeController.text,
+        _firstNameController.text,
+        _lastNameController.text,
+        _emailController.text,
+        _dateOfBirthController.text,
+        _addressController.text,
+        _phoneNumberController.text,
+        _postalCodeController.text,
       ),
     );
+    //print('first name: ${_firstNameController.text.toString()}');
   }
 
   @override
@@ -93,7 +94,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
               children: [
                 Expanded(
                   child: TextInputFormWidget(
-                    controller: firstNameController,
+                    controller: _firstNameController,
                     keyField: 'personal_information_first_name',
                     textInputType: TextInputType.name,
                     hintText: 'Erzet',
@@ -102,7 +103,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 SizedBox(width: defaultPadding),
                 Expanded(
                   child: TextInputFormWidget(
-                    controller: lastNameController,
+                    controller: _lastNameController,
                     keyField: 'personal_information_last_name',
                     textInputType: TextInputType.name,
                     hintText: 'Satari',
@@ -114,7 +115,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
             const FieldTextWidget(titleText: 'Email'),
             SizedBox(height: defaultPadding),
             TextInputFormWidget(
-              controller: emailController,
+              controller: _emailController,
               keyField: 'personal_information_email',
               textInputType: TextInputType.emailAddress,
               hintText: '. . .',
@@ -134,7 +135,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
               children: [
                 Expanded(
                   child: TextInputFormWidget(
-                    controller: phoneNumberController,
+                    controller: _phoneNumberController,
                     keyField: 'personal_information_phone_number',
                     textInputType: TextInputType.phone,
                     hintText: '. . .',
@@ -143,7 +144,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 SizedBox(width: defaultPadding),
                 Expanded(
                   child: TextInputFormWidget(
-                    controller: dateOfBirthController,
+                    controller: _dateOfBirthController,
                     keyField: 'personal_information_date_of_birth',
                     textInputType: TextInputType.datetime,
                     hintText: '. . .',
@@ -175,7 +176,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
               children: [
                 Expanded(
                   child: TextInputFormWidget(
-                    controller: addressController,
+                    controller: _addressController,
                     keyField: 'personal_information_location',
                     textInputType: TextInputType.multiline,
                     hintText: '. . .',
@@ -184,7 +185,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
                 SizedBox(width: defaultPadding),
                 Expanded(
                   child: TextInputFormWidget(
-                    controller: postalCodeController,
+                    controller: _postalCodeController,
                     keyField: 'personal_information_postal_code',
                     textInputType: TextInputType.number,
                     hintText: '. . .',
