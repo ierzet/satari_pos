@@ -5,7 +5,7 @@ import 'package:satari_pos/features/home/presentation/bloc/content_bloc.dart';
 import 'package:satari_pos/features/home/presentation/bloc/content_state.dart';
 import 'package:satari_pos/features/home/presentation/widgets/side_menu_widget/side_menu.dart';
 import 'package:satari_pos/features/profile/presentation/cubit/menu_personal_information_cubit.dart';
-import 'package:satari_pos/features/profile/presentation/pages/profile_account_page.dart';
+import 'package:satari_pos/features/profile/presentation/pages/profile_page.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/content_widget/bill_widget.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/content_widget/menu_widget.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/content_widget/settings_widget.dart';
