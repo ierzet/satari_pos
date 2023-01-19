@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:satari_pos/core/util/constant.dart';
+import 'package:satari_pos/features/login/presentation/bloc/app_bloc.dart';
 import 'package:satari_pos/features/profile/presentation/bloc/bloc.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/object_widget/field_text_widget.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/object_widget/header_text_widget.dart';
@@ -42,6 +43,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select((AppBloc bloc) => bloc.state.user);
+    _emailController.text = user.email.toString();
     return Flexible(
       flex: 2,
       child: Container(

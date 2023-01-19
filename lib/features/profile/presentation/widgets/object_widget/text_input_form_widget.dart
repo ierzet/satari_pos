@@ -23,6 +23,7 @@ class TextInputFormWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
+        enabled: keyField == 'personal_information_email' ? false : true,
         controller: controller,
         key: Key(keyField),
         //TODO: ada null check disini
