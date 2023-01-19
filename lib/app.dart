@@ -8,6 +8,7 @@ import 'package:satari_pos/features/home/presentation/bloc/content_bloc.dart';
 import 'package:satari_pos/features/login/presentation/bloc/app_bloc.dart';
 import 'package:satari_pos/features/profile/domain/repositories/personal_information_repository.dart';
 import 'package:satari_pos/features/profile/presentation/bloc/personal_information_bloc.dart';
+import 'package:satari_pos/features/profile/presentation/bloc/profile_navigation_bloc.dart';
 
 import 'features/login/data/repositories/authentication_repository.dart';
 
@@ -45,6 +46,9 @@ class App extends StatelessWidget {
                 personalInformationRepository:
                     RepositoryProvider.of<PersonalInformationRepository>(
                         context)),
+          ),
+          BlocProvider(
+            create: (context) => ProfileNavBloc(),
           ),
         ],
         child: const AppView(),

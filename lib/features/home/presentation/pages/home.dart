@@ -28,10 +28,7 @@ class Home extends StatelessWidget {
           child: BlocBuilder<ContentBloc, ContentState>(
             builder: (context, state) {
               if (state is ProfileAccountState) {
-                return BlocProvider(
-                  create: (context) => RightBorderCubit(),
-                  child: const ProfilePage(),
-                );
+                return const ProfilePage();
               } else if (state is BillState) {
                 return const BillWidget();
               } else if (state is StatisticState) {
@@ -43,10 +40,7 @@ class Home extends StatelessWidget {
               } else if (state is MenuState) {
                 return const MenuWidget();
               } else {
-                return BlocProvider(
-                  create: (context) => RightBorderCubit(),
-                  child: const ProfilePage(),
-                );
+                return const ProfilePage();
               }
             },
           ),

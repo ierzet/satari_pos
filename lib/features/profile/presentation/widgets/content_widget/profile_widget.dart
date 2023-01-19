@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:satari_pos/core/util/constant.dart';
+import 'package:satari_pos/features/home/presentation/bloc/content_event.dart';
+import 'package:satari_pos/features/profile/presentation/bloc/profile_navigation_bloc.dart';
+import 'package:satari_pos/features/profile/presentation/bloc/profile_navigation_event.dart';
 import 'package:satari_pos/features/profile/presentation/cubit/menu_personal_information_cubit.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/object_widget/content_header_text.dart';
 
@@ -12,24 +15,26 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RightBorderCubit myBorder = context.read<RightBorderCubit>();
     MenuProfile personalInformation = MenuProfile(
-      myBorder: myBorder,
       title: 'Personal Information',
       icon: Icons.person,
-      optMenu: 1,
+      onTap: () {
+        context.read<ProfileNavBloc>().add(PersonalInformationNavEvent());
+      },
     );
     MenuProfile loginAndPassword = MenuProfile(
-      myBorder: myBorder,
       title: 'Login and Password',
       icon: Icons.lock,
-      optMenu: 2,
+      onTap: () {
+        context.read<ProfileNavBloc>().add(LoginAndPasswordNavEvent());
+      },
     );
     MenuProfile notification = MenuProfile(
-      myBorder: myBorder,
       title: 'Notification',
       icon: Icons.notifications,
-      optMenu: 3,
+      onTap: () {
+        context.read<ProfileNavBloc>().add(NotificationNavEvent());
+      },
     );
     return Flexible(
       child: SingleChildScrollView(
@@ -166,57 +171,47 @@ class Profile extends StatelessWidget {
 class MenuProfile extends StatelessWidget {
   const MenuProfile({
     Key? key,
-    required this.myBorder,
     required this.title,
     required this.icon,
-    required this.optMenu,
+    required this.onTap,
   }) : super(key: key);
 
-  final RightBorderCubit myBorder;
   final String title;
   final IconData icon;
-  final int optMenu;
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RightBorderCubit, bool>(
-      builder: (context, state) {
-        return InkWell(
-            highlightColor: Colors.amber[200],
-            splashColor: Colors.amber[200],
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            onTap: () {
-              myBorder.changeBorder(optMenu);
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                border: state == true
-                    ? const Border(right: BorderSide.none)
-                    : Border(
-                        right: BorderSide(
-                            width: defaultPaddingHalf / 2,
-                            color: primaryColor)),
-                color: Colors.white,
+    return InkWell(
+        highlightColor: Colors.amber[200],
+        splashColor: Colors.amber[200],
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+                right: BorderSide(
+                    width: defaultPaddingHalf / 2, color: primaryColor)),
+            color: Colors.white,
+          ),
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: <Widget>[
+              Icon(
+                icon,
+                size: defaultPadding * 1.25,
               ),
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    icon,
-                    size: defaultPadding * 1.25,
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    title,
-                    style: GoogleFonts.lato(
-                      fontSize: fontSizeFieldText,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  )
-                ],
-              ),
-            ));
-      },
-    );
+              const SizedBox(width: 16),
+              Text(
+                title,
+                style: GoogleFonts.lato(
+                  fontSize: fontSizeFieldText,
+                  fontWeight: FontWeight.normal,
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
