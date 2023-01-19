@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:satari_pos/core/util/constant.dart';
-import 'package:satari_pos/features/home/presentation/bloc/content_event.dart';
 import 'package:satari_pos/features/profile/presentation/bloc/profile_navigation_bloc.dart';
 import 'package:satari_pos/features/profile/presentation/bloc/profile_navigation_event.dart';
-import 'package:satari_pos/features/profile/presentation/cubit/menu_personal_information_cubit.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/object_widget/content_header_text.dart';
 
 class Profile extends StatelessWidget {
+  final String state;
   const Profile({
     Key? key,
+    required this.state,
   }) : super(key: key);
 
   @override
@@ -21,6 +21,9 @@ class Profile extends StatelessWidget {
       onTap: () {
         context.read<ProfileNavBloc>().add(PersonalInformationNavEvent());
       },
+      rightBorderSide: state == 'PersonalInformationNavState'
+          ? BorderSide(width: defaultPaddingHalf / 2, color: primaryColor)
+          : BorderSide.none,
     );
     MenuProfile loginAndPassword = MenuProfile(
       title: 'Login and Password',
@@ -28,6 +31,9 @@ class Profile extends StatelessWidget {
       onTap: () {
         context.read<ProfileNavBloc>().add(LoginAndPasswordNavEvent());
       },
+      rightBorderSide: state == 'LoginAndPasswordNavState'
+          ? BorderSide(width: defaultPaddingHalf / 2, color: primaryColor)
+          : BorderSide.none,
     );
     MenuProfile notification = MenuProfile(
       title: 'Notification',
@@ -35,8 +41,11 @@ class Profile extends StatelessWidget {
       onTap: () {
         context.read<ProfileNavBloc>().add(NotificationNavEvent());
       },
+      rightBorderSide: state == 'NotificationNavState'
+          ? BorderSide(width: defaultPaddingHalf / 2, color: primaryColor)
+          : BorderSide.none,
     );
-    return Flexible(
+    return Expanded(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,12 +183,13 @@ class MenuProfile extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.onTap,
+    required this.rightBorderSide,
   }) : super(key: key);
 
   final String title;
   final IconData icon;
-
   final VoidCallback onTap;
+  final BorderSide rightBorderSide;
 
   @override
   Widget build(BuildContext context) {
@@ -191,8 +201,8 @@ class MenuProfile extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             border: Border(
-                right: BorderSide(
-                    width: defaultPaddingHalf / 2, color: primaryColor)),
+              right: rightBorderSide,
+            ),
             color: Colors.white,
           ),
           padding: const EdgeInsets.all(16),

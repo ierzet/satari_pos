@@ -5,6 +5,6 @@ class LoginAndPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Login and Password');
+    return const Expanded(child: Text('Login and Password'));
   }
 }

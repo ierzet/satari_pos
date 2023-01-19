@@ -18,7 +18,21 @@ class ProfilePage extends StatelessWidget {
     return SafeArea(
       child: Row(
         children: <Widget>[
-          const Profile(),
+          BlocBuilder<ProfileNavBloc, ProfileNavState>(
+            builder: (context, state) {
+              if (state is PersonalInformationNavState) {
+                return const Profile(state: 'PersonalInformationNavState');
+              } else if (state is LoginAndPasswordNavState) {
+                return const Profile(state: 'LoginAndPasswordNavState');
+              } else if (state is NotificationNavState) {
+                return const Profile(state: 'NotificationNavState');
+              } else {
+                return const Profile(
+                  state: 'PersonalInformationNavState',
+                );
+              }
+            },
+          ),
           BlocBuilder<PersonalInformationBloc, PersonalInformationState>(
             builder: (context, state) {
               if (state is PersonalInformationAdding) {
