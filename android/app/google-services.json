@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "769165278290",
+    "project_id": "sataripos",
+    "storage_bucket": "sataripos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769165278290:android:38d60ccfe3d74945aeb38b",
+        "android_client_info": {
+          "package_name": "com.example.satari_pos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769165278290-qmvle2ier2kplmpdfhecjlvcs67rkti5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_meIC86bSjQ-zsT-OldHzs30ovZYswAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769165278290-qmvle2ier2kplmpdfhecjlvcs67rkti5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "769165278290-63s7tnm3osjnk2uo52oemri7aoerd8qu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "satariPos"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
