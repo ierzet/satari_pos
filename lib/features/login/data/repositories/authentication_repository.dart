@@ -1,13 +1,15 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 // ignore: depend_on_referenced_packages
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:google_sign_in/google_sign_in.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 import 'package:satari_pos/core/util/cache.dart';
+import 'package:satari_pos/core/util/constant.dart';
 
 import '../../domain/entities/user.dart';
 
@@ -167,6 +169,8 @@ class AuthenticationRepository {
   final CacheClient _cache;
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final _personalInformationCollectionReference =
+      FirebaseFirestore.instance.collection(personalInformationCollection);
 
   /// Whether or not the current environment is web
   /// Should only be overriden for testing purposes. Otherwise,
@@ -206,6 +210,16 @@ class AuthenticationRepository {
         email: email,
         password: password,
       );
+      await _personalInformationCollectionReference.doc(email).set({
+        'firstName': '',
+        'lastName': '',
+        'email': email,
+        'address': '',
+        'dateOfBirth': '',
+        'phoneNumber': '',
+        'postalCode': '',
+        'gender': '',
+      });
     } on FirebaseAuthException catch (e) {
       throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
     } catch (_) {
@@ -232,8 +246,21 @@ class AuthenticationRepository {
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
+        await _personalInformationCollectionReference
+            .doc('ierzetsatari@gmail.com')
+            .set(
+          {
+            'firstName': '',
+            'lastName': '',
+            'email': googleUser.email,
+            'address': '',
+            'dateOfBirth': '',
+            'phoneNumber': '',
+            'postalCode': '',
+            'gender': '',
+          },
+        );
       }
-
       await _firebaseAuth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw LogInWithGoogleFailure.fromCode(e.code);

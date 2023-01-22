@@ -43,13 +43,13 @@ class ProfilePage extends StatelessWidget {
                 return BlocBuilder<ProfileNavBloc, ProfileNavState>(
                   builder: (context, state) {
                     if (state is PersonalInformationNavState) {
-                      return const PersonalInformation();
+                      return const PersonalInformationWidget();
                     } else if (state is LoginAndPasswordNavState) {
                       return const LoginAndPassword();
                     } else if (state is NotificationNavState) {
                       return const NotificationProfile();
                     }
-                    return const PersonalInformation();
+                    return const PersonalInformationWidget();
                   },
                 );
               }
@@ -60,22 +60,3 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-/*
-
-
-
-
- if (state == PersonalInformationNavState) {
-                return const Profile();
-              } else if (state == LoginAndPasswordNavState) {
-                return const LoginAndPassword();
-              } else if (state == NotificationNavState) {
-                return NotificationProfile();
-              }
-              return const Profile();
-
-*/

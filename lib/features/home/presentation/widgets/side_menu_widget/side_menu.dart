@@ -4,6 +4,9 @@ import 'package:satari_pos/core/util/constant.dart';
 import 'package:satari_pos/features/home/presentation/bloc/content_bloc.dart';
 import 'package:satari_pos/features/home/presentation/bloc/content_event.dart';
 import 'package:satari_pos/features/login/presentation/bloc/app_bloc.dart';
+import 'package:satari_pos/features/profile/presentation/bloc/personal_information_bloc.dart';
+import 'package:satari_pos/features/profile/presentation/bloc/personal_information_event.dart';
+import 'package:satari_pos/features/profile/presentation/bloc/personal_information_state.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({super.key});
@@ -96,10 +99,18 @@ class SideMenu extends StatelessWidget {
                 }
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Log Out'),
-              onTap: () => context.read<AppBloc>().add(AppLogoutRequested()),
+            BlocBuilder<PersonalInformationBloc, PersonalInformationState>(
+              builder: (context, state) {
+                return ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text('Log Out'),
+                  onTap: () {
+                    BlocProvider.of<PersonalInformationBloc>(context)
+                        .add(SetInitialPersonalInformation());
+                    context.read<AppBloc>().add(AppLogoutRequested());
+                  },
+                );
+              },
             ),
           ],
         ),

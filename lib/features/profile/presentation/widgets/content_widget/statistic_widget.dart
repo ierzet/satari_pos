@@ -12,14 +12,14 @@ class StatisticWidget extends StatefulWidget {
 
 class _StatisticWidgetState extends State<StatisticWidget> {
   PersonalInformation personalInformation = const PersonalInformation(
-    firstName: 'erzet',
-    lastName: 'satari',
-    email: 'sadf',
-    address: 'dsf',
-    dateOfBirth: 'sdf',
-    phoneNumber: 'asdf',
-    postalCode: 'sdf',
-  );
+      firstName: 'erzet',
+      lastName: 'satari',
+      email: 'sadf',
+      address: 'dsf',
+      dateOfBirth: 'sdf',
+      phoneNumber: 'asdf',
+      postalCode: 'sdf',
+      gender: 'sdf');
 
   List<PersonalInformation> dataPersonalInformation = [];
 

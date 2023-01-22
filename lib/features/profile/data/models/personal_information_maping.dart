@@ -9,6 +9,7 @@ class PersonalInformationMaping extends PersonalInformation {
     required dateOfBirth,
     required phoneNumber,
     required postalCode,
+    required gender,
   }) : super(
           firstName: firstName,
           lastName: lastName,
@@ -17,6 +18,7 @@ class PersonalInformationMaping extends PersonalInformation {
           dateOfBirth: dateOfBirth,
           phoneNumber: phoneNumber,
           postalCode: postalCode,
+          gender: gender,
         );
 
   factory PersonalInformationMaping.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class PersonalInformationMaping extends PersonalInformation {
       dateOfBirth: json['dateOfBirth'],
       phoneNumber: json['phoneNumber'],
       postalCode: json['postalCode'],
+      gender: json['gender'],
     );
   }
 
@@ -41,6 +44,7 @@ class PersonalInformationMaping extends PersonalInformation {
       'dateOfBirth': dateOfBirth,
       'phoneNumber': phoneNumber,
       'postalCode': postalCode,
+      'gender': gender,
     };
   }
 }

@@ -23,6 +23,8 @@ double defaultPaddingDouble = defaultPadding * 2;
 double defaultPaddingTriple = defaultPadding * 3;
 double defaultPaddingQuadruple = defaultPadding * 4;
 
+String blank = '';
+
 TextStyle textStyleNormal = GoogleFonts.lato(
   fontSize: fontSizeFieldText,
   fontWeight: FontWeight.normal,
@@ -37,7 +39,7 @@ TextStyle textStyleLite = GoogleFonts.lato(
 );
 TextStyle textStyleHeader = GoogleFonts.lato(
   fontSize: fontSizeApp,
-  fontWeight: FontWeight.w300,
+  fontWeight: FontWeight.bold,
 );
 TextStyle textStyleContentHeader = GoogleFonts.lato(
   fontSize: fontSizeContentHeader,

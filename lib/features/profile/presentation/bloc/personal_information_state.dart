@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:formz/formz.dart';
+import 'package:satari_pos/features/profile/data/models/first_name.dart';
 import 'package:satari_pos/features/profile/domain/entities/personal_information.dart';
 
 abstract class PersonalInformationState extends Equatable {
@@ -26,6 +28,16 @@ class PersonalInformationAdded extends PersonalInformationState {
   List<Object> get props => [];
 }
 
+class PersonalInformationUpdating extends PersonalInformationState {
+  @override
+  List<Object> get props => [];
+}
+
+class PersonalInformationUpdated extends PersonalInformationState {
+  @override
+  List<Object> get props => [];
+}
+
 class PersonalInformationLoading extends PersonalInformationState {
   @override
   List<Object> get props => [];
@@ -34,7 +46,7 @@ class PersonalInformationLoading extends PersonalInformationState {
 class PersonalInformationLoaded extends PersonalInformationState {
   final PersonalInformation personalInformation;
 
-  PersonalInformationLoaded({required this.personalInformation});
+  PersonalInformationLoaded(this.personalInformation);
 
   @override
   List<Object> get props => [personalInformation];
@@ -57,4 +69,9 @@ class PersonalInformationError extends PersonalInformationState {
 
   @override
   List<Object> get props => [message];
+}
+
+class FirstNameValidation extends PersonalInformationState {
+  @override
+  List<Object> get props => [];
 }

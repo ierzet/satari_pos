@@ -8,6 +8,7 @@ class PersonalInformation extends Equatable {
   final String dateOfBirth;
   final String phoneNumber;
   final String postalCode;
+  final String gender;
 
   const PersonalInformation({
     required this.firstName,
@@ -17,6 +18,7 @@ class PersonalInformation extends Equatable {
     required this.dateOfBirth,
     required this.phoneNumber,
     required this.postalCode,
+    required this.gender,
   });
 
   static const empty = PersonalInformation(
@@ -26,7 +28,8 @@ class PersonalInformation extends Equatable {
       address: '',
       dateOfBirth: '',
       phoneNumber: '',
-      postalCode: '');
+      postalCode: '',
+      gender: '');
 
   bool get isEmpty => this == PersonalInformation.empty;
   bool get isNotEmpty => this != PersonalInformation.empty;
@@ -40,6 +43,7 @@ class PersonalInformation extends Equatable {
       dateOfBirth: json['dateOfBirth'],
       phoneNumber: json['phoneNumber'],
       postalCode: json['postalCode'],
+      gender: json['gender'],
     );
   }
 
@@ -51,16 +55,19 @@ class PersonalInformation extends Equatable {
         'dateOfBirth': dateOfBirth,
         'phoneNumber': phoneNumber,
         'postalCode': postalCode,
+        'gender': gender,
       };
 
-  PersonalInformation copyWith(
-      {String? firstName,
-      String? lastName,
-      String? email,
-      String? address,
-      String? dateOfBirth,
-      String? phoneNumber,
-      String? postalCode}) {
+  PersonalInformation copyWith({
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? address,
+    String? dateOfBirth,
+    String? phoneNumber,
+    String? postalCode,
+    String? gender,
+  }) {
     return PersonalInformation(
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
@@ -69,6 +76,7 @@ class PersonalInformation extends Equatable {
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       postalCode: postalCode ?? this.postalCode,
+      gender: gender ?? this.gender,
     );
   }
 
@@ -81,5 +89,6 @@ class PersonalInformation extends Equatable {
         dateOfBirth,
         phoneNumber,
         postalCode,
+        gender,
       ];
 }
