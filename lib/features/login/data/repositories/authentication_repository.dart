@@ -246,22 +246,28 @@ class AuthenticationRepository {
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
-        await _personalInformationCollectionReference
-            .doc('ierzetsatari@gmail.com')
-            .set(
-          {
-            'firstName': '',
-            'lastName': '',
-            'email': googleUser.email,
-            'address': '',
-            'dateOfBirth': '',
-            'phoneNumber': '',
-            'postalCode': '',
-            'gender': '',
-          },
-        );
+        await _firebaseAuth.signInWithCredential(credential);
+        final checkPersonalInformationExist =
+            await _personalInformationCollectionReference
+                .doc('ierzetsatari@gmail.com')
+                .get();
+        if (!checkPersonalInformationExist.exists) {
+          await _personalInformationCollectionReference
+              .doc('ierzetsatari@gmail.com')
+              .set(
+            {
+              'firstName': '',
+              'lastName': '',
+              'email': googleUser.email,
+              'address': '',
+              'dateOfBirth': '',
+              'phoneNumber': '',
+              'postalCode': '',
+              'gender': '',
+            },
+          );
+        }
       }
-      await _firebaseAuth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw LogInWithGoogleFailure.fromCode(e.code);
     } catch (_) {

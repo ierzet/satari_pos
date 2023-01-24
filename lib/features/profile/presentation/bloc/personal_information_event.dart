@@ -77,14 +77,63 @@ class GetDataPersonalInformation extends PersonalInformationEvent {
   final String email;
 
   GetDataPersonalInformation(this.email);
+
+  @override
+  List<Object> get props => [email];
 }
 
 class DeleteForPersonalInformation extends PersonalInformationEvent {}
 
-/*
-class SetInitialPersonalInformation extends PersonalInformationEvent {
-  final String email;
+class FirstNameChanged extends PersonalInformationEvent {
+  final String firstName;
 
-  SetInitialPersonalInformation(this.email);}
-  */
+  FirstNameChanged(this.firstName);
 
+  @override
+  List<Object> get props => [firstName];
+}
+
+class LastNameChanged extends PersonalInformationEvent {
+  final String lastName;
+
+  LastNameChanged(this.lastName);
+
+  @override
+  List<Object> get props => [lastName];
+}
+
+class DateOfBirthChanged extends PersonalInformationEvent {
+  final String dateOfBirth;
+
+  DateOfBirthChanged(this.dateOfBirth);
+
+  @override
+  List<Object> get props => [dateOfBirth];
+}
+
+class AddressChanged extends PersonalInformationEvent {
+  final String address;
+
+  AddressChanged(this.address);
+
+  @override
+  List<Object> get props => [address];
+}
+
+class PhoneNumberChanged extends PersonalInformationEvent {
+  final String phoneNumber;
+
+  PhoneNumberChanged(this.phoneNumber);
+
+  @override
+  List<Object> get props => [phoneNumber];
+}
+
+class PostalCodeChanged extends PersonalInformationEvent {
+  final String postalCode;
+
+  PostalCodeChanged(this.postalCode);
+
+  @override
+  List<Object> get props => [postalCode];
+}

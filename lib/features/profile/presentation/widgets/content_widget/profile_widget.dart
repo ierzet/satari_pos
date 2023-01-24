@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:satari_pos/core/util/constant.dart';
+import 'package:satari_pos/features/profile/domain/entities/personal_information.dart';
+import 'package:satari_pos/features/profile/presentation/bloc/bloc.dart';
 import 'package:satari_pos/features/profile/presentation/bloc/profile_navigation_bloc.dart';
 import 'package:satari_pos/features/profile/presentation/bloc/profile_navigation_event.dart';
 import 'package:satari_pos/features/profile/presentation/widgets/object_widget/content_header_text.dart';
@@ -75,12 +77,28 @@ class Profile extends StatelessWidget {
                       backgroundColor: primaryColor,
                     ),
                     SizedBox(height: defaultPadding),
-                    Text(
-                      'Aurelia',
-                      style: GoogleFonts.lato(
-                        fontSize: fontSizeFieldText,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    BlocBuilder<PersonalInformationBloc,
+                        PersonalInformationState>(
+                      builder: (context, state) {
+                        if (state is PersonalInformationLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (state is PersonalInformationLoaded) {
+                          final PersonalInformation personalInformationData =
+                              state.personalInformation;
+                          return Text(
+                            '${personalInformationData.firstName} ${personalInformationData.lastName}',
+                            style: GoogleFonts.lato(
+                              fontSize: fontSizeFieldText,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
                     ),
                     SizedBox(height: defaultPadding),
                     Text(

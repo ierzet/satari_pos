@@ -35,10 +35,7 @@ class PersonalInformationWidget extends StatelessWidget {
         context.select((PersonalInformationBloc bloc) => bloc.state.toString());
 
     String? getGetnder;
-/*
-    void intiate(context) => BlocProvider.of<PersonalInformationBloc>(context)
-        .add(SetInitialPersonalInformation(user.email.toString()));
-*/
+
     void postPersonalInformation(context) {
       BlocProvider.of<PersonalInformationBloc>(context).add(
         CreatePersonalInformation(
@@ -57,7 +54,7 @@ class PersonalInformationWidget extends StatelessWidget {
 
     void updatePersonalInformation(context) {
       BlocProvider.of<PersonalInformationBloc>(context).add(
-        CreatePersonalInformation(
+        UpdatePersonalInformation(
           firstNameController.text,
           lastNameController.text,
           emailController.text,
@@ -85,16 +82,19 @@ class PersonalInformationWidget extends StatelessWidget {
         child: BlocBuilder<PersonalInformationBloc, PersonalInformationState>(
           builder: (context, state) {
             //print('state: $state');
-
+            //print('email masuk ga: ${user.email.toString()}');
             if (state is PersonalInformationEmpty) {
               BlocProvider.of<PersonalInformationBloc>(context)
                   .add(GetDataPersonalInformation(user.email.toString()));
-            } else if (state is PersonalInformationAdded) {
+            }
+            if (state is PersonalInformationUpdated) {
               BlocProvider.of<PersonalInformationBloc>(context)
                   .add(GetDataPersonalInformation(user.email.toString()));
-            } else if (state is PersonalInformationLoading) {
+            }
+            if (state is PersonalInformationLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state is PersonalInformationLoaded) {
+            }
+            if (state is PersonalInformationLoaded) {
               PersonalInformation personalInformationData =
                   state.personalInformation;
               firstNameController.text = personalInformationData.firstName;
@@ -170,10 +170,10 @@ class PersonalInformationWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Flexible(
+                        /*Flexible(
                           child: Text(
                               'userPersonalInformation.toString() dan ${user.email.toString()}'),
-                        ),
+                        ),*/
                       ],
                     );
                   },
@@ -213,6 +213,10 @@ class PersonalInformationWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: TextField(
+                          /*onChanged: (firstName) {
+                            BlocProvider.of<PersonalInformationBloc>(context)
+                                .add(FirstNameChanged(firstName));
+                          },*/
                           enabled: true,
                           controller: firstNameController,
                           key: const Key('personal_information_first_name'),

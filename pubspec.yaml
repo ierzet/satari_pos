@@ -28,7 +28,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   provider: ^6.0.3
   shared_preferences: ^2.0.15
-  syncfusion_flutter_datepicker: ^20.4.42
+ 
 
 dev_dependencies:
   flutter_lints: ^2.0.0

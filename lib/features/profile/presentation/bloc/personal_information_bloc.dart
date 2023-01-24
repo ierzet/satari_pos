@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:satari_pos/features/profile/data/models/first_name.dart';
 
 import 'package:satari_pos/features/profile/domain/repositories/personal_information_repository.dart';
 import 'package:satari_pos/features/profile/presentation/bloc/bloc.dart';
@@ -12,7 +14,7 @@ class PersonalInformationBloc
   }) : super(InitialPersonalInformation()) {
     on<CreatePersonalInformation>((event, emit) async {
       emit(PersonalInformationAdding());
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 100));
       try {
         await personalInformationRepository.createPersonalInformation(
             firstName: event.firstName,
@@ -32,7 +34,7 @@ class PersonalInformationBloc
 
     on<UpdatePersonalInformation>((event, emit) async {
       emit(PersonalInformationUpdating());
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 100));
       try {
         await personalInformationRepository.updatePersonalInformation(
             firstName: event.firstName,
@@ -52,9 +54,7 @@ class PersonalInformationBloc
 
     on<GetDataPersonalInformation>((event, emit) async {
       emit(PersonalInformationLoading());
-      print(
-          'coba cek email: final personalInformationData = await personalInformationRepository.getPersonalinformation(email: ${event.email});');
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 100));
       try {
         final personalInformationData = await personalInformationRepository
             .getPersonalinformation(email: event.email.toString());
@@ -67,12 +67,36 @@ class PersonalInformationBloc
 
     on<SetInitialPersonalInformation>((event, emit) async {
       emit(InitialPersonalInformation());
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 100));
       try {
         emit(PersonalInformationEmpty());
       } catch (e) {
         emit(PersonalInformationError(e.toString()));
       }
     });
+/*
+    on<FirstNameChanged>((event, emit) {
+      emit(PersonalInformationValidation());
+      final firstName = FirstName.dirty(event.firstName);
+      final currentState = state as PersonalInformationValidation;
+      try {
+        emit(currentState.copyWith(
+          firstName: firstName,
+          status: Formz.validate([firstName, currentState.firstName]),
+        ));
+      } catch (e) {
+        emit(PersonalInformationError(e.toString()));
+      }
+    });
+*/
+    on<LastNameChanged>((event, emit) {});
+
+    on<DateOfBirthChanged>((event, emit) {});
+
+    on<AddressChanged>((event, emit) {});
+
+    on<PhoneNumberChanged>((event, emit) {});
+
+    on<PostalCodeChanged>((event, emit) {});
   }
 }

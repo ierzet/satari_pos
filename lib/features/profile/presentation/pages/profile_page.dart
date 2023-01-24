@@ -33,26 +33,16 @@ class ProfilePage extends StatelessWidget {
               }
             },
           ),
-          BlocBuilder<PersonalInformationBloc, PersonalInformationState>(
+          BlocBuilder<ProfileNavBloc, ProfileNavState>(
             builder: (context, state) {
-              if (state is PersonalInformationAdding) {
-                return const CircularProgressIndicator();
-              } else if (state is PersonalInformationError) {
-                return const Center(child: Text('Error'));
-              } else {
-                return BlocBuilder<ProfileNavBloc, ProfileNavState>(
-                  builder: (context, state) {
-                    if (state is PersonalInformationNavState) {
-                      return const PersonalInformationWidget();
-                    } else if (state is LoginAndPasswordNavState) {
-                      return const LoginAndPassword();
-                    } else if (state is NotificationNavState) {
-                      return const NotificationProfile();
-                    }
-                    return const PersonalInformationWidget();
-                  },
-                );
+              if (state is PersonalInformationNavState) {
+                return const PersonalInformationWidget();
+              } else if (state is LoginAndPasswordNavState) {
+                return const LoginAndPassword();
+              } else if (state is NotificationNavState) {
+                return const NotificationProfile();
               }
+              return const PersonalInformationWidget();
             },
           ),
         ],
